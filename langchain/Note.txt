@@ -1,0 +1,16 @@
+There are different types pf prompt template that we can use in our programe according to requirment. these are
+
+
+StringPromptTemplate             single string, and generally are used for simpler inputs.
+ChatPromptTemplates              list of messages. These "templates" consist of a list of templates themselves
+MessagesPlaceholder
+
+
+
+
+LCEL (Langchain Expression language)
+invoke
+
+
+chain = left to right 
+

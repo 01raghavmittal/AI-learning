@@ -1,0 +1,24 @@
+pattern
+
+2 loops (a) outer loop :- rows
+        (b) inner loop :- columms
+
+
+Rule:
+
+(a) for the outer loop focus on the line or rows
+
+(b) for the inner loop focus on columm & somehow connected with rows
+
+(c) print them inside inner loop
+
+(d) observe Semmentary
+
+
+
+
+HOTS:
+
+in python , we can use ord() which convert characters to their ASCII values
+
+in python , we can use chr() which convert ASCII values to characters

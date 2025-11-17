@@ -1,0 +1,5 @@
+The * operator unpacks the list.
+for example :
+        list =[1, 2, 3, 4, 6, 9, 12, 18, 36]
+        print(*list)  ==> 1 2 3 4 6 9 12 18 36
+

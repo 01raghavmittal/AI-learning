@@ -1,0 +1,28 @@
+There are different types pf prompt template that we can use in our programe according to requirment. these are
+
+
+StringPromptTemplate             single string, and generally are used for simpler inputs.
+ChatPromptTemplates              list of messages. These "templates" consist of a list of templates themselves
+MessagesPlaceholder
+
+
+
+
+LCEL (Langchain Expression language)
+invoke
+
+
+chain = left to right 
+-------------------------------------------------------------------------------------------
+Difference between agent and llm chain
+
+ReAct architecture        Here ReAct stands for Reasoning and Acting in language model.
+
+Langchain and Langgraph has in-built ReAct agent which is think about query and act accrordingly i.e use tools and finally give response.
+
+
+Langchain-tavily - provides seamless integration between LangChain and Tavily, a search engine designed for AI agents. It supports both search and extract functionalities.
+
+runnable object 
+------------------------------------------------------------------------------------------------
+

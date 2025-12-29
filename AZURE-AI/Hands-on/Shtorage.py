@@ -30,7 +30,7 @@ class AzureStorageManager:
         if not connection_string:
             raise ValueError("Azure Connection String is required.")
         self.connection_string = connection_string
-        print("✓ Azure Storage Manager initialized successfully")
+        print("  Azure Storage Manager initialized successfully")
     
     async def _get_client(self) -> BlobServiceClient:
         """
@@ -55,7 +55,7 @@ class AzureStorageManager:
             try:
                 # Attempt to create the container
                 await service_client.create_container(container_name)
-                print(f"✓ Container '{container_name}' created successfully.")
+                print(f"  Container '{container_name}' created successfully.")
                 return True
             except ResourceExistsError:
                 # Container already exists - this is acceptable
@@ -63,11 +63,11 @@ class AzureStorageManager:
                 return True
             except AzureError as e:
                 # Azure-specific error occurred
-                print(f"✗ Azure error creating container: {str(e)}")
+                print(f"   Azure error creating container: {str(e)}")
                 return False
             except Exception as e:
                 # Unexpected error
-                print(f"✗ Unexpected error creating container: {str(e)}")
+                print(f"   Unexpected error creating container: {str(e)}")
                 return False
 
     async def upload_blob(self, container_name: str, blob_name: str, 
@@ -98,17 +98,17 @@ class AzureStorageManager:
                 with open(file_path, "rb") as file_data:
                     await blob_client.upload_blob(file_data, overwrite=True)
                 
-                print(f"✓ Blob '{blob_name}' uploaded successfully.")
+                print(f"  Blob '{blob_name}' uploaded successfully.")
                 return True
                 
         except FileNotFoundError as e:
-            print(f"✗ File error: {str(e)}")
+            print(f"   File error: {str(e)}")
             return False
         except AzureError as e:
-            print(f"✗ Azure error uploading blob: {str(e)}")
+            print(f"   Azure error uploading blob: {str(e)}")
             return False
         except Exception as e:
-            print(f"✗ Unexpected error uploading blob: {str(e)}")
+            print(f"   Unexpected error uploading blob: {str(e)}")
             return False
 
     async def upload_folder(self, container_name: str, folder_path: str) -> Dict[str, any]:
@@ -154,13 +154,13 @@ class AzureStorageManager:
                             with open(file_path, "rb") as file_data:
                                 await blob_client.upload_blob(file_data, overwrite=True)
                             
-                            print(f"✓ Uploaded: {blob_name}")
+                            print(f"  Uploaded: {blob_name}")
                             uploaded_files.append(blob_name)
                             
                         except Exception as e:
                             # Log individual file upload errors
                             error_msg = str(e)
-                            print(f"✗ Failed to upload {blob_name}: {error_msg}")
+                            print(f"   Failed to upload {blob_name}: {error_msg}")
                             errors.append({"file": blob_name, "error": error_msg})
             
             # Return summary status
@@ -172,10 +172,10 @@ class AzureStorageManager:
             }
             
         except NotADirectoryError as e:
-            print(f"✗ Directory error: {str(e)}")
+            print(f"   Directory error: {str(e)}")
             return {"status": "error", "details": str(e)}
         except Exception as e:
-            print(f"✗ Unexpected error uploading folder: {str(e)}")
+            print(f"   Unexpected error uploading folder: {str(e)}")
             return {"status": "error", "details": str(e)}
 
     async def list_blobs(self, container_name: str) -> List[str]:
@@ -198,17 +198,17 @@ class AzureStorageManager:
                 async for blob in container_client.list_blobs():
                     blob_names.append(blob.name)
                 
-                print(f"✓ Found {len(blob_names)} blobs in container.")
+                print(f"  Found {len(blob_names)} blobs in container.")
                 return blob_names
                 
             except ResourceNotFoundError:
-                print(f"✗ Container '{container_name}' not found.")
+                print(f"   Container '{container_name}' not found.")
                 return []
             except AzureError as e:
-                print(f"✗ Azure error listing blobs: {str(e)}")
+                print(f"   Azure error listing blobs: {str(e)}")
                 return []
             except Exception as e:
-                print(f"✗ Unexpected error listing blobs: {str(e)}")
+                print(f"   Unexpected error listing blobs: {str(e)}")
                 return []
 
     async def download_blob(self, container_name: str, blob_name: str, 
@@ -239,17 +239,17 @@ class AzureStorageManager:
                 with open(download_path, "wb") as file:
                     file.write(await download_stream.readall())
                 
-                print(f"✓ Blob '{blob_name}' downloaded successfully.")
+                print(f"  Blob '{blob_name}' downloaded successfully.")
                 return True
                 
         except ResourceNotFoundError:
-            print(f"✗ Blob '{blob_name}' not found.")
+            print(f"   Blob '{blob_name}' not found.")
             return False
         except AzureError as e:
-            print(f"✗ Azure error downloading blob: {str(e)}")
+            print(f"   Azure error downloading blob: {str(e)}")
             return False
         except Exception as e:
-            print(f"✗ Unexpected error downloading blob: {str(e)}")
+            print(f"   Unexpected error downloading blob: {str(e)}")
             return False
 
     async def delete_blob(self, container_name: str, blob_name: str) -> bool:
@@ -271,17 +271,17 @@ class AzureStorageManager:
                     blob=blob_name
                 )
                 await blob_client.delete_blob()
-                print(f"✓ Blob '{blob_name}' deleted successfully.")
+                print(f"  Blob '{blob_name}' deleted successfully.")
                 return True
                 
             except ResourceNotFoundError:
-                print(f"✗ Delete failed: Blob '{blob_name}' not found.")
+                print(f"   Delete failed: Blob '{blob_name}' not found.")
                 return False
             except AzureError as e:
-                print(f"✗ Azure error deleting blob: {str(e)}")
+                print(f"   Azure error deleting blob: {str(e)}")
                 return False
             except Exception as e:
-                print(f"✗ Unexpected error deleting blob: {str(e)}")
+                print(f"   Unexpected error deleting blob: {str(e)}")
                 return False
 
     async def delete_container(self, container_name: str) -> bool:
@@ -298,19 +298,24 @@ class AzureStorageManager:
             try:
                 # Delete container
                 await service_client.delete_container(container_name)
-                print(f"✓ Container '{container_name}' deleted successfully.")
+                print(f"  Container '{container_name}' deleted successfully.")
                 return True
                 
             except ResourceNotFoundError:
-                print(f"✗ Container '{container_name}' not found.")
+                print(f"   Container '{container_name}' not found.")
                 return False
             except AzureError as e:
-                print(f"✗ Azure error deleting container: {str(e)}")
+                print(f"   Azure error deleting container: {str(e)}")
                 return False
             except Exception as e:
-                print(f"✗ Unexpected error deleting container: {str(e)}")
+                print(f"   Unexpected error deleting container: {str(e)}")
                 return False
 
+#--------------------------------------------------------------------------------------------------------------------
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  
 
 # Example usage and testing
 async def main():
@@ -321,6 +326,7 @@ async def main():
     Includes commented examples for each operation type.
     """
     # Get connection string from environment or use default
+
     connection_string = os.getenv(
         'AZURE_STORAGE_CONNECTION_STRING')
     
@@ -331,9 +337,9 @@ async def main():
         # Example container name
         container_name = "demo-container"
         
-        # 1. Create container
-        print("\n--- Create Container ---")
-        await manager.create_container(container_name)
+        # # 1. Create container
+        # print("\n--- Create Container ---")
+        # await manager.create_container(container_name)
         
         # 2. List blobs
         print("\n--- List Blobs ---")
@@ -350,27 +356,27 @@ async def main():
         
         # 4. Upload folder
         print("\n--- Upload Folder (Uncomment to use) ---")
-        # Example: result = await manager.upload_folder(container_name, "./path/to/folder")
+        # result = await manager.upload_folder(container_name, r"C:\Users\raghav.mittal\Downloads\reviews_folder")
         # print(f"  Status: {result['status']}, Uploaded: {result['count']}")
         
         # 5. Download blob
         print("\n--- Download Blob (Uncomment to use) ---")
-        # Example: await manager.download_blob(container_name, "blob-name", "./downloads/file.txt")
+        # await manager.download_blob(container_name, "reviews_folder/201801.pdf", "./downloads/file.txt")
         
         # 6. Delete blob
         print("\n--- Delete Blob (Uncomment to use) ---")
-        # Example: await manager.delete_blob(container_name, "blob-name")
+        # await manager.delete_blob(container_name, "reviews_folder/201801.pdf")
         
         # 7. Delete container
         print("\n--- Delete Container (Uncomment to use) ---")
-        # Example: await manager.delete_container(container_name)
+        # await manager.delete_container(container_name)
         
-        print("\n✓ Demo completed successfully!")
+        print("\n  Demo completed successfully!")
         
     except ValueError as e:
-        print(f"✗ Configuration error: {str(e)}")
+        print(f"   Configuration error: {str(e)}")
     except Exception as e:
-        print(f"✗ Error in main: {str(e)}")
+        print(f"   Error in main: {str(e)}")
 
 
 

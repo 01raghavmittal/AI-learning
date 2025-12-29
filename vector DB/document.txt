@@ -1,0 +1,5 @@
+Azure resouces: 
+
+Azure OpenAi service
+Azure Ai Search --> "retrieval" and indexing of your documents. It creates a vector index from your data, performs vector/hybrid search, and includes features like semantic ranking for better relevance. It is also the service that directly connects to and indexes content from SharePoint and OneDrive.
+

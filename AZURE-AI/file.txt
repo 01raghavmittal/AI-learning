@@ -1,0 +1,30 @@
+Azure Resources:
+
+1. learning
+
+2. Course-2_learning-Azure
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------
+Course-2_learning-Azure
+
+Resources: c2learning-Azure_01 (Azure AI hub) 
+           c2learning-Azure_01 (foundry)
+ 
+
+
+c2learning-Azure_01 :   learning_p1 (project)       

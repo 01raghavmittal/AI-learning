@@ -81,3 +81,8 @@ with project_client:
     #Uncomment these lines to delete the agent when done
     #project_client.agents.delete_agent(agent.id)
     #print("Deleted agent")
+
+
+#--e5126831-b2eb-4075-bba6-5db4195d2ffa------------clientid------------
+#--019d04c2-7181-43b9-a276-09788a3f42d8------------tenantid------------
+#--f10593fe-b8aa-4457-a3a9-dea13b9550bb------------Secret------------

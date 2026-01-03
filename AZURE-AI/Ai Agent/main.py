@@ -119,5 +119,5 @@ def test_apikey():
 if __name__ == "__main__":
     test_token()
     test_agent()
-    # test_apikey()
+    test_apikey()
 

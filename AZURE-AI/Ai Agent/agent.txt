@@ -1,0 +1,43 @@
+# https://learn.microsoft.com/en-us/agent-framework/user-guide/agents/running-agents?pivots=programming-language-python
+link
+
+
+🛠️ Running an Agent You Already Created
+
+You can directly run it using either non‑streaming or streaming methods:
+
+⚡ Non‑Streaming Run 
+    How it works:  
+    You send a request, the agent processes it fully, and you get the entire response at once.
+
+    Code example:
+    response = await agent.run("Write me a poem about flowers")
+    print(response.text)   # full text result
+    
+    Pros:
+    Simple to use.
+    You get the complete answer in one object (AgentRunResponse).
+    Easier if you just want the final result.
+
+    Cons:
+    You wait until the agent finishes before seeing anything.
+    Not ideal for long or detailed outputs.
+
+🌊 Streaming Run
+    How it works:  
+    The agent sends partial updates as it generates the response. You can print or process chunks in real time.
+
+    Code example:
+    async for update in agent.run_stream("Write me a poem about flowers"):
+        if update.text:
+            print(update.text, end="", flush=True)
+
+    Pros:
+    You see the response as it’s being generated (like live typing).
+    Useful for long answers or interactive experiences.
+    Can handle tool calls or status updates mid‑response.
+
+    Cons:
+    Slightly more complex to handle since you process multiple updates.
+    You need async iteration.
+

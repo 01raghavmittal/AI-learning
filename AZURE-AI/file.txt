@@ -27,4 +27,15 @@ Resources: c2learning-Azure_01 (Azure AI hub)
  
 
 
-c2learning-Azure_01 :   learning_p1 (project)       
+c2learning-Azure_01 :   learning_p1 (project)    
+
+
+
+
+
+
+
+
+
+
+assistant: "Every great achievement starts with the courage to take the first step. Believe in your ability, embrace the journey, and let your persistence be louder than your doubts."

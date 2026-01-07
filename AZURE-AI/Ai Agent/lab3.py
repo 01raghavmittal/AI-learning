@@ -1,5 +1,7 @@
 """
 Docstring for Ai Agent.lab3
+
+loop the chat until user can't end it with same thread 
 """
 
 import os

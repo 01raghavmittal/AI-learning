@@ -1,26 +1,35 @@
-from typing import List
-def combinationSum2( candidates: List[int], target: int) -> List[List[int]]:
-    result=[]
-    candidates.sort()
-    combination(index=0,array=candidates,target=target,d_list=[],ans=result)
-
-    return result
-
-def combination(index,array,target,d_list,ans):
-    if target==0:
-        ans.append(d_list.copy())
+def fun(arr, index, target, dummy_list, answer):
+    # Base case: target reached
+    if target == 0:
+        answer.append(list(dummy_list))  # store a copy of current combination
         return
-    
-    for i in range(index,len(array),1):
-        if(i>index and array[i]==array[i-1]):
+
+    for i in range(index, len(arr)):
+        # Skip duplicates
+        if i > index and arr[i] == arr[i-1]:
             continue
-        if array[i]>target:
+
+        # If current number exceeds target, stop exploring further
+        if arr[i] > target:
             break
-        d_list.append(array[i])
-        combination(i+1,array,target-array[i],d_list,ans)
-        d_list.pop()
-        
 
+        # Choose the current number
+        dummy_list.append(arr[i])
 
+        # Recurse with reduced target and next index
+        fun(arr, i+1, target - arr[i], dummy_list, answer)
 
-     
+        # Backtrack (remove last chosen number)
+        dummy_list.pop()
+
+arr = [10, 1, 2, 7, 6, 1, 5]
+target = 8
+
+# Sort array to handle duplicates properly
+arr.sort()
+
+answer = []
+fun(arr, 0, target, [], answer)
+
+print("Combinations that sum to", target, ":")
+print(answer)

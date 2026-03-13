@@ -1,25 +1,27 @@
-def combination_1(index: int, array: list, target: int, ans: list, result: list):
-    # Base case
-    if index == len(array):
+def combination_sum(arr, index, target, dummy_list, answer):
+    # Base case: if we reach the end of the array
+    if index == len(arr):
         if target == 0:
-            result.append(ans.copy())
+            # Add a copy of the current combination to the answer
+            answer.append(dummy_list[:])
         return
-
-    # Pick the element (can be reused)
-    if array[index] <= target:
-        ans.append(array[index])
-        combination_1(index, array, target - array[index], ans, result)
-        ans.pop()  
-
-    # Non pick the element
-    combination_1(index + 1, array, target, ans, result)
-
-
-def combination_sum(array: list, target: int):
-    result = []
-    combination_1(0, array, target, [], result)
-    return result
+    
+    # If current element can be included
+    if arr[index] <= target:
+        # Include the element
+        dummy_list.append(arr[index])
+        # Recurse with same index (since we can reuse the element)
+        combination_sum(arr, index, target - arr[index], dummy_list, answer)
+        # Backtrack (remove the element)
+        dummy_list.pop()
+    
+    # Move to the next index
+    combination_sum(arr, index + 1, target, dummy_list, answer)
 
 
-result=combination_sum(array=[2,3,6,7],target=7)
-print(result)
+# Example usage
+arr = [2, 3, 6, 7]
+target = 7
+answer = []
+combination_sum(arr, 0, target, [], answer)
+print("Combinations that sum to target:", answer)

@@ -1,0 +1,23 @@
+Machine Learning Important Libraries
+=====================================
+
+Data Manipulation & Analysis
+------------------------------
+1. NumPy          - Numerical computing, arrays and math operations
+2. Pandas         - Data manipulation and analysis (DataFrames)
+
+Data Visualization
+-------------------
+3. Matplotlib     - Base plotting library
+4. Seaborn        - Statistical data visualization (built on Matplotlib)
+
+Machine Learning & Modeling
+-----------------------------
+5. Scikit-learn   - Classical ML algorithms (import as: sklearn)
+6. XGBoost        - Gradient boosting (high-performance decision trees)
+
+Deep Learning
+--------------
+7. TensorFlow     - Deep learning framework by Google
+8. Keras          - High-level neural network API (built into TensorFlow)
+9. PyTorch        - Deep learning framework by Meta

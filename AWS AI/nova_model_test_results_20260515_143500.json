@@ -1,0 +1,101 @@
+[
+  {
+    "model_name": "Nova 2 Lite (Regional)",
+    "model_id": "amazon.nova-2-lite-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova 2 Lite (US CRIS)",
+    "model_id": "us.amazon.nova-2-lite-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova 2 Lite (Global)",
+    "model_id": "global.amazon.nova-2-lite-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Micro (Regional)",
+    "model_id": "amazon.nova-micro-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Micro (US CRIS)",
+    "model_id": "us.amazon.nova-micro-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Lite (Regional)",
+    "model_id": "amazon.nova-lite-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Lite (US CRIS)",
+    "model_id": "us.amazon.nova-lite-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Pro (Regional)",
+    "model_id": "amazon.nova-pro-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Pro (US CRIS)",
+    "model_id": "us.amazon.nova-pro-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Premier (Regional)",
+    "model_id": "amazon.nova-premier-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  },
+  {
+    "model_name": "Nova Premier (US CRIS)",
+    "model_id": "us.amazon.nova-premier-v1:0",
+    "response_time": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "response_text": null,
+    "status": "\u274c Error: Unable to locate credentials"
+  }
+]

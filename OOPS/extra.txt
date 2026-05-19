@@ -1,0 +1,160 @@
+inheritance 
+
+Great question—this is where most people get confused. Instead of memorizing definitions, think in terms of **what your method needs to work with**.
+
+---
+
+# 🧠 How to decide which method to use
+
+## 🔹 Use **Instance Method** when working with object data
+
+👉 Choose this when your method depends on **individual object properties**
+
+### ✔ Use case:
+
+* Each object has its own value
+* Behavior differs per object
+
+### 📌 Example:
+
+```python
+class Customer:
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
+
+    def deposit(self, amount):   # instance method
+        self.balance += amount
+```
+
+💡 Why?
+Because `balance` is different for every customer.
+
+---
+
+## 🔹 Use **Class Method** when working with class-level data
+
+👉 Choose this when logic relates to the **whole class, not a specific object**
+
+### ✔ Use case:
+
+* Modifying shared data (class variables)
+* Creating factory methods (alternative constructors)
+
+### 📌 Example:
+
+```python
+class Employee:
+    company = "Google"
+
+    @classmethod
+    def change_company(cls, name):
+        cls.company = name
+```
+
+💡 Why?
+Because `company` is shared by all employees.
+
+---
+
+### 🔥 Very important use: Factory methods
+
+```python
+class User:
+    def __init__(self, name):
+        self.name = name
+
+    @classmethod
+    def from_string(cls, data):
+        name = data.split("-")[0]
+        return cls(name)
+
+u = User.from_string("Raghav-123")
+```
+
+💡 Used when creating objects in special ways.
+
+---
+
+## 🔹 Use **Static Method** when no class or object data is needed
+
+👉 Choose this when method is just **utility logic**
+
+### ✔ Use case:
+
+* Independent helper functions
+* Logic related to class conceptually, but no data needed
+
+### 📌 Example:
+
+```python
+class Bank:
+    @staticmethod
+    def calculate_interest(amount, rate):
+        return (amount * rate) / 100
+```
+
+💡 Why?
+No `self` or `cls` needed—just pure calculation.
+
+---
+
+# 🔥 Decision Rule (Super Simple)
+
+Ask yourself:
+
+### 1️⃣ Does it use object data (`self`)?
+
+👉 YES → Instance Method
+
+---
+
+### 2️⃣ Does it use class data (`cls`)?
+
+👉 YES → Class Method
+
+---
+
+### 3️⃣ Does it use neither?
+
+👉 YES → Static Method
+
+---
+
+# ⚡ Real-world analogy
+
+Think of a **Bank system**:
+
+| Method Type     | Example                | Meaning               |
+| --------------- | ---------------------- | --------------------- |
+| Instance Method | `deposit()`            | Works on YOUR account |
+| Class Method    | `change_bank_policy()` | Affects ALL accounts  |
+| Static Method   | `calculate_interest()` | Just a formula        |
+
+---
+
+# 🚨 Common Mistake
+
+Beginners often overuse static methods.
+
+👉 If your method touches object data even slightly → **don’t use static**
+
+---
+
+# ✅ Summary
+
+* **Instance** → object-specific behavior
+* **Class** → class-wide behavior
+* **Static** → helper logic
+
+---
+
+If you want, I can give you **interview-style tricky questions** on this (very commonly asked 😄).
+
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,448 @@
+Exercise: Invoking an Amazon Bedrock Foundation Model
+0:05
+/
+16:28
+The exercises in this course will have an associated charge in your AWS account. In this exercise, you will create the following resources:
+
+Amazon Q Developer
+
+Amazon Bedrock
+
+The final task in this exercise includes instructions to delete all the resources that you create.
+
+Familiarize yourself with 
+Amazon Q Developer pricing
+, 
+Amazon Bedrock pricing
+ and the 
+AWS Free Tier
+.
+
+Exercise Overview
+In this exercise, you'll use Amazon Bedrock APIs to:
+
+✅ Generate videos asynchronously with the start_async_invoke API and save them to an S3 bucket. 
+✅ Create and transform text through the invoke_model API. 
+✅ Stream AI-generated text responses in real time by using the invoke_model_with_response_stream API. 
+
+Troubleshooting
+🤔 If you get stuck or run into any errors, go back a few steps to ensure you didn't miss any instructions.
+
+🛠️ Still having trouble? Try these steps: 
+🔁 Rerun the previous cells to ensure your environment is correctly set up. 
+🧹 Restart your kernel and clear output to reset the environment. 
+📋 Double-check for typos in code or parameter names. 
+🌐 Make sure your internet connection is active (for any API calls). 
+📄 Look at the error message carefully – it often tells you exactly what's wrong.
+
+Task 1: Install Python (Windows)
+⚠️ If you already have Python 3 installed, you may skip this task.  
+
+These instructions are Windows specific. If you're using a Mac, please  see Task 1: Install Brew + Python (Mac).
+
+Download the latest version of Python 3 from the official website.  Ensure that you download the appropriate version for your operating  system.  
+https://www.python.org/downloads/
+.
+
+Once the download has finished, open the installer from your download location.
+
+Select the Add python.exe to PATH check box and then click Install Now.
+
+Click Close to close out the installation wizard.
+
+It is now safe to delete the installer.
+
+Open the Terminal application and run the following command to ensure Python 3 installed correctly:
+cd python3 --version
+
+Task 2: Install Visual Studio Code 2022 (Windows)
+If you already have Visual Studio Code 2022 installed, you may skip this task.
+
+Download the latest version of Visual Studio Code 2022 from the  official website. Ensure that you download Visual Studio Code 2022 and  not Visual Studio 2022. 
+https://visualstudio.microsoft.com/downloads/
+.
+
+Walk through the installation ensure that you leave the default values selected.
+
+Once the installation has completed, it's safe to delete the installer.
+
+Task 3: Install AWS CLI (Windows)
+If you already have the AWS CLI v2 installed, you may skip this step.
+
+Open the Terminal application and run the following command: 
+msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+
+Complete the installation using the default values provided in the wizard. 
+aws --version
+
+Task 1: Install Brew + Python (Mac)
+⚠️ If you already have Brew and Python 3 installed, you may skip this  task. These instructions are Mac specific. If you're using Windows, see  Task 1: Install Python (Windows).
+
+The first part of these instructions will install Homebrew  on your Mac. This is a package installer that makes installing the  tools that are needed for this exercise much simpler. For more  information about this tool, please see the 
+Homebrew FAQ
+.
+
+Open the Terminal application on your Mac.
+
+Paste the following command into the terminal:
+./bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
+
+Provide your password and then press return / enter on your keyboard to confirm the installation.   
+
+Once the installation has finished, run the following command to verify installation:
+brew --version
+
+Now that brew is installed, it can be used to install Python 3. Run the following command to install Python 3:/
+brew install python
+
+Once the installation has finished, the following command will verify that installation was successful:
+python3 --version
+
+Task 2: Install Visual Studio Code 2022 (Mac)
+If you already have Visual Studio Code 2022 installed, you may skip this task.
+
+Download the latest version of Visual Studio Code 2022 from the  official website. Ensure that you download Visual Studio Code 2022 and  not Visual Studio 2022.
+https://visualstudio.microsoft.com/downloads/
+.
+
+Open the ZIP file that is downloaded. Once expanded, drag Visual Studio Code.app to the Applications folder.
+
+When the copy process has finished, it's safe to delete the ZIP file that was downloaded.
+
+Task 3: Install AWS CLI (Mac)
+If you already have the AWS CLI v2 installed, you may skip this step.
+
+In the Terminal run the following command:
+
+brew install awscli
+
+Once the installation has finished, the following command will verify that installation was successful:
+
+aws --version
+
+Task 4: Create an AWS Account
+If you already have an AWS account that you're using for these exercises, you may skip this task.
+
+Open the 
+AWS sign up page
+ in your browser.
+
+Fill in your email address. This will be the user name for your root AWS user account.
+
+Set an AWS account name. This will be the nickname for your account and can be changed at a later date.
+
+Choose Verify email address
+
+Complete the Security Verification.
+
+Check your email for a verification code from AWS. Paste the code into the Verification code box and select Verify.
+
+Set and confirm your Root user password.
+
+Choose Continue (step 1 of 5).
+
+Fill in your contact information.
+
+Select Continue (step 2 of 5).
+
+Enter your Billing information. This exercise will do its best to keep charges at a minimum.
+
+Choose Verify and continue (step 3 of 5).
+
+Provide your phone number for identity verification.
+
+Enter the Verify code.
+
+Select Continue (step 4 of 5).
+
+Ensure that Basic support - Free is selected.
+
+Finish the process by selecting Complete sign up.
+
+Once the creation process has finished, choose Go to the AWS Management Console.
+
+You've just created the AWS account that you'll be using for the remainder of this course.
+
+Task 5: Create an IAM user and configure AWS CLI
+While the root user could be used to complete these exercises, it's best to always follow the practice of least privilege. In this task, you'll create an IAM user and configure your AWS CLI to use these credentials.
+
+Task 5.1: Create an IAM user
+The first step is to create a new AWS user.
+
+At the top of the AWS Management Console, in the search bar, search for and choose IAM.
+
+Under AWS Account is a Sign-in URL for IAM users in this account. Save this URL in a safe space for future use. This URL will be your console login link if you need to use the graphical user interface (GUI) in the future.
+
+In the navigation pane of the IAM dashboard, choose Users.
+
+Choose Create user.
+
+Name the user exerciseuser.
+
+Select the Provide user access to the AWS Management Console - optional checkbox.
+
+Under Are you providing console access to a person? choose I want to create an IAM user.
+
+For Console password make sure that Custom password is selected.
+
+Enter a custom password for this user. Make sure to securely store it in your records.
+
+Uncheck the box labeled Users must create a new password at next sign-in - Recommended.
+
+Choose Next.
+
+Under Permissions options select Attach policies directly.
+
+Pick the AdministratorAccess policy from the list.
+
+Choose Next.
+
+Review the summary page, and when ready select Create User.
+
+Open the exerciseuser that was just created.
+
+Select the Security credentials tab.
+
+Choose Create access key.
+
+Under Access key best practices & alternatives, select Other.
+
+For the Description tag value, write Generative AI Exercises.
+
+Select Create access keys.
+
+Download the Access key and Secret access key using the Download .csv file button.
+
+Save these credentials as they will be needed in this and future exercises.
+
+You created an IAM and attached a policy document to that user. This follows the practice of least privilege as you'll no longer need to use the root user to interact with AWS.
+
+Task 5.2: Configure AWS CLI
+The AWS CLI needs to be configured to use these credentials. This will allow you to programmatically interact with AWS in the upcoming tasks.
+
+Open the Terminal application on your local machine.
+
+Run the following command to configure your AWS CLI:
+aws configure
+
+Populate the AWS Access Key ID with the value from the CSV file that was created in the previous task.
+
+Repeat the same process for AWS Secret Access Key.
+
+For Default region name enter us-east-1.
+
+Set Default output format to json.
+
+Running the following command will verify that installation was successful:
+aws s3 ls
+
+If your terminal doesn't report any errors, you've just configured the AWS CLI correctly.
+
+Task 6: Create Python environment and installing packages
+Python virtual environments allow you to install packages and work in an isolated environment rather than installing them for your entire system. This will allow you to isolate each exercise to its own environment.
+
+Task 6.1: Creating the environment
+A new environment will need to be created for this exercise.
+
+In the terminal, run the following command to move to your Desktop folder:
+cd ~/Desktop
+
+Run this Python command to create a new environment:
+python3 -m venv exercise1
+
+This will create a new folder on your desktop called exercise1. It will contain all of the work that you'll do for this exercise.
+
+     3. This command will activate the new environment. Please run the command that corresponds to your operating system.
+
+Windows:
+.\exercise1\Scripts\Activate.ps1
+
+Mac:
+source exercise1/bin/activate
+
+You should now see exercise1 in your terminal. This means that the environment is now active.
+
+Task 6.2: Installing Python packages
+Python packages are needed to complete this exercise and must be installed in this newly formed environment.
+
+Run the following command to install boto3 and jupyter:
+pip install boto3 jupyter
+
+This command installs the necessary python packages that will be used in this exercise. Boto3 allows Python to interact with AWS and Jupyter will be used to make calls to Amazon Bedrock.
+
+Task 7: Enable Amazon Bedrock Models
+To utilize Amazon Bedrock, you need to enable access to the models that will be used in this exercise. This includes Amazon Nova Micro and Amazon Nova Canvas.
+
+Open the AWS console and sign in using your exerciseuser credentials.
+
+Ensure that you're working in the us-east-1 region.
+
+At the top of the AWS Management Console, in the search bar, search for and choose Amazon Bedrock.
+
+Select Model access to bring up the list of models that Bedrock offers.
+
+Choose Modify model access.
+
+From the list, select the following models to enable:
+
+Amazon Nova Micro
+
+Amazon Nova Canvas
+
+Amazon Nova Reel
+
+Select Next and then Submit.
+
+You should see Model access updates submitted displayed.
+
+You have requested access to the models that will be used in the rest of the exercise.
+
+Task 8: Create an S3 bucket for video generation
+To store the videos that will be created using Bedrock, you'll need to create an S3 bucket to host them.
+
+At the top of the AWS Management Console, in the search bar, search for and choose S3.
+
+Choose Create bucket.
+
+Under Bucket name enter gen-ai-exercise-<YOUR INITIALS>. 
+
+NOTE: Swap <YOUR INITIALS> for your initials. An example name would be gen-ai-exercise-fs.
+
+Select Create bucket.
+
+You should see Successfully created bucket "gen-ai-exercise-<YOUR INITIALS>" displayed.
+
+This creates an S3 bucket that will be used to host the generated videos that Amazon Bedrock will create for you.
+
+Task 9: Using Amazon Bedrock to create videos
+In this task, you will use the Amazon Bedrock API to generate videos and store them in an S3 bucket. This will demonstrate Bedrocks' ability to asynchronously create content on demand.
+
+In your Terminal, run the following command to start Jupyter:
+jupyter notebook
+
+In the newly opened Jupyter browser window, select File > New > Notebook. This will create an interactive environment where you run and test code.
+
+Ensure that Python 3 is selected from the dropdown menu.
+
+Choose Select.
+
+Select Untitled and enter genai-exercise1-video.ipynb as the name for your newly created notebook. Choose Rename.
+
+Next, you'll need to enter the Python code that generates videos and stores them in Amazon S3.
+
+39
+import boto3
+import json
+import random
+bedrock_runtime = boto3.client("bedrock-runtime", region_name="us-east-1")
+bedrock = boto3.client(service_name="bedrock", region_name="us-east-1")  
+s3 = boto3.client("s3")
+model_id = "amazon.nova-reel-v1:0"
+
+prompt = "A person dancing on a mountain."
+
+
+In the first cell, paste the provided code.
+
+Substitute <FILL IN BUCKET NAME HERE> for the name of the S3 bucket that you created for this exercise in a previous task. For example: "s3Uri": "s3://gen-ai-exercise-fs/video/"
+
+Select the cell and then choose the play button at the top of the notebook to run the first block of code.  You should receive: Job submitted! Invocation ARN: arn:aws:bedrock:us-east-1:771031499912:async-invoke/r1aj5tmcbzn3
+
+Create another cell under the code that you just pasted. In that new cell, insert the following code and choose the play button:
+
+
+12
+job_status = bedrock_runtime.get_async_invoke(invocationArn=invocation_arn)
+print("Current Status:", job_status["status"])
+When the message returns Current Status: Completed, the job has completed.  Note: This can take 2-3 minutes to complete. After the job has completed, you can find the newly created video folder in your S3 bucket. This job demonstrates the asynchronous processing capabilities of Bedrock using the start_async_invoke API.
+
+Task 10: Using Amazon Bedrock for text generation
+Amazon Bedrock can generate and edit text using the InvokeModel API call. This Jupyter notebook demonstrates how to submit text prompts and receive AI-generated responses that can help transform or improve your original content.
+
+First, create another notebook in Jupyter.
+
+In the Jupyter browser window, select File, New, Notebook.
+
+Choose Select.
+
+Select Untitled and enter genai-exercise1-text1.ipynb as the name for your newly created notebook.
+
+Choose Rename.
+
+Next,  enter the code that will prompt Amazon Bedrock to edit and generate text. 
+
+1234567891011121314151617
+import boto3
+import json
+
+MODEL_ID = "amazon.nova-micro-v1:0"
+bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
+
+response = bedrock.invoke_model(
+    modelId=MODEL_ID,
+    guardrailVersion="DRAFT",
+    body=json.dumps({
+
+In the first cell, paste the provided code.
+
+Select the cell and then choose the play button at the top of the notebook to run the code.
+
+This example illustrates how to perform text generation using the invoke_model API call in Amazon Bedrock.
+
+Task 11: Using Amazon Bedrock for streaming text generation
+Amazon Bedrock can generate and transform text using the InvokeModelWithResponseStream API call. This Jupyter notebook demonstrates how to use the API to stream model responses in real time, allowing you to process the output incrementally as it is generated.
+
+First, create another notebook in Jupyter.
+
+In the Jupyter browser window, select File, New, Notebook.
+
+Choose Select.
+
+Select Untitled and enter genai-exercise1-text2.ipynb as the name for your newly created notebook.
+
+Choose Rename.
+
+Next, enter the code that will prompt Amazon Bedrock to generate and transform text.
+
+34567891011121314151617181920212223242526272829303132333435363738394021
+import boto3
+import json
+
+bedrock = boto3.client('bedrock-runtime', region_name='us-east-1')
+model_id = 'amazon.nova-micro-v1:0'
+
+payload = {
+    "messages": [
+        {
+            "role": "user",
+
+In the cell, paste the provided code.
+
+Select the cell and then choose the play button at the top of the notebook to run the code.
+
+Your cell output should show the transformed text.
+
+This notebook demonstrates how to use the invoke_model_with_response_stream API call to stream model responses in real time.
+
+Task 12: Cleanup
+To stop the Jupyter server, simply shutdown your Terminal application.
+
+If you'd no longer like to use the Python environment or save the work that you've done in this exercise, delete the exercise1 folder that was created for this exercise.
+
+Summary
+You now know how to:
+
+✅ Launch a Jupyter Notebook to interact with Amazon Bedrock.
+✅ Generate videos asynchronously and save them to an S3 bucket.
+✅ Perform text generation and editing using Bedrock's API.
+✅ Stream AI-generated text responses in real time.
+✅ Use Bedrock APIs to create and transform content efficiently.
+
+Additional Resources
+Amazon Bedrock Documentation
+
+Amazon Bedrock API Reference
+
+Boto3 SDK Docs
+
+

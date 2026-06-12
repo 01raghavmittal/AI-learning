@@ -1,0 +1,228 @@
+The exercises in this course will have an associated charge in your AWS account. In this exercise, you will create the following resources:
+
+Amazon Q Developer
+
+The final task in this exercise includes instructions to delete all the resources that you create.
+
+Familiarize yourself with 
+Amazon Q Developer pricing
+ and the 
+AWS Free Tier
+.
+
+Exercise Overview
+In this exercise, you’ll explore building with Amazon Q Developer using the Visual Studio Code extension. You'll start with a simple, buggy Python CLI application and use Amazon Q Developer in Visual Studio Code to debug, improve, and add functionality to the application.
+
+✏️ Please note that Amazon Q Developer will generate content that is nondeterministic in nature. This means that the exact output from Amazon Q Developer cannot be predetermined. Throughout this exercise, you may be required to debug and troubleshoot with Amazon Q Developer to reach desired results. You may need to complete tasks that are not defined in this exercise because of generative AI and its nondeterministic nature.
+
+You will:
+
+✅ Sign up for an AWS Builder ID
+
+✅ Install and connect to Amazon Q Developer
+
+✅ Explore and fix bugs in an existing Python app
+
+✅ Convert the app to a basic web application using the /dev agent
+
+✅ Generate documentation using the /doc agent
+
+Troubleshooting
+🤔 If you get stuck or run into any errors, go back a few steps to ensure you didn't miss any instructions.
+
+🛠️ Still having trouble? Try these steps:
+
+🔁 Rerun the application or refresh the Q Developer chat.
+📋 Double-check for typos in code or invalid inputs.
+🌐 Make sure your internet connection is active.
+🧹 Restart Visual Studio Code if Q Developer isn’t responding.
+
+Prerequisites
+Before you start, you need to have:
+
+Python 3.x
+
+AWS CLI configured with AWS credentials (aws configure)
+
+Visual Studio Code
+
+If you do not have AWS credentials configured, Python, and Visual Studio Code installed, return to Exercise 1 to install needed prerequisites.
+
+Task 1: Create an AWS Builder ID
+You will first sign up for an AWS Builder ID. An AWS Builder ID is a personal identity that allows you to access certain AWS tools and services like Amazon Q Developer without being tied to a specific AWS account. It’s free to create and only takes a few minutes.
+
+Visit the documentation linked below and follow instructions on how to create an AWS Builder ID:
+
+https://docs.aws.amazon.com/signin/latest/userguide/create-aws_builder_id.html
+
+Sign up with your email and follow the instructions to verify your account.
+
+Task 2: Set up project structure and install the Amazon Q Developer Extension in Visual Studio Code
+There are multiple ways you can interact with Amazon Q Developer. One way is to use the Amazon Q Developer Extension in your IDE. You will install the Amazon Q Developer extension in Visual Studio Code.
+
+Open a new terminal or command line prompt. 
+
+If you're on a Mac, run:
+
+cd ~/Desktop && python3 -m venv exercise2 && source exercise2/bin/activate && pip install boto3 jupyter 
+
+If you're on Windows, run:
+
+cd ~/Desktop
+python -m venv exercise2
+.\exercise2\Scripts\Activate.ps1
+pip install boto3 jupyter
+
+Open Visual Studio Code.
+
+Select File > Open Folder, and navigate to the exercise2 folder created in step 1.
+
+Go to the Extensions panel in Visual Studio Code.
+
+Search for Amazon Q and install the Amazon Q Developer extension.
+
+Click the Q icon in the sidebar and sign in using your AWS Skill Builder ID.
+
+Task 3: Load and Explore the Python CLI App
+First, create a new directory to keep your work organized. Inside the directory, create a new file that you will use to troubleshoot the code.
+
+Create a new folder in Visual Studio Code by selecting File, and then Open Folder > New Folder > Create. 
+
+Name the new folder code.
+
+With the code folder selected, create a new file in Visual Studio Code by selecting File > New File. 
+
+Select Python File. This will open a new file.
+
+Next, you'll need to copy the following code into the file to troubleshoot and experiment with Amazon Q.
+
+40393837343536313233293025262728232422202119181716151413121191087645231
+class Task:
+    def __init__(self, name, priority):
+        self.name = name
+        self.priority = int(priority)  
+
+    def __str__(self):
+        return f"[Priority {self.priority}] {self.name}"
+
+class TaskManager:
+    def __init__(self):
+
+Once you have opened the file, copy and paste the sample code and save the file as task_tracker.py.
+
+Return to the Terminal. Ensure you are in the code folder. Run ls if you are using a Mac or dir if you are using a Windows machine. You should see the task_tracker.py file in the output.
+
+✏️ If you do not see the file listed in the output, you must change directories into the appropriate folder. Run the command: cd code to change directories into the code folder.
+
+✏️ If you do see the task_tracker.py file listed in the output, proceed to the next step.
+
+Type the following command to run the application:
+python task_tracker.py
+
+Try adding, listing, and removing tasks to explore the current behavior.
+
+Task 4: Debug with Q Developer
+This application has defects that need to be resolved. You will work with Amazon Q Developer to attempt to resolve the known issues. Try the following tasks to uncover bugs in the application:
+
+Add a task with non-integer priority (e.g., high).
+
+Remove a task with an out-of-range index.
+
+Observe sorting behavior when listing tasks. Notice how the highest priority isn't listed first (1 being highest priority, 5 being lowest priority).
+
+Amazon Q Developer has multiple features you can use to attempt to fix the defects.
+
+In VSC, at the bottom navigation pane, choose Amazon Q. Then, choose Open Chat Panel. In the chat window, enter the following questions:
+
+Why does the app crash on non-integer input?
+
+How to fix the error when an out-of-range task index is input for removal?
+
+How to validate inputs?
+
+How to sort the task list by priority in ascending order?
+
+For each question you ask, Q Developer should recognize the error and implement a fix.
+
+View the updates provided by Q Developer to determine if you want to accept the bug fixes.
+
+Iterate with Q Developer in the chat until you are satisfied with the results, test the changes, and continue until all of the defects are resolved.
+
+Task 5: Feature Implementation using the Amazon Q Developer /dev Agent
+Now you will use the /dev agent in Q Developer to convert the application from a python command line application to a web application using Flask.
+
+Enter the following into the Amazon Q Developer chat window:
+/dev Convert this CLI task tracker into a Flask web app that saves tasks to a local file. Include a front-end and back-end implementation. Use the code folder as context. If any dependencies are needed, generate them in the requirements.txt file in the code directory.
+
+⏰ Q Developer will then generate a plan and the code for this feature implementation. It could take a few minutes to generate.
+
+🚨 If you see the following error: The folder you selected is too large for me to use as context. Please choose a smaller folder to work on, follow the prompts to change the source folder to be the code folder where the Python file is located.
+
+When Q Developer provides a plan and generates code, follow any additional steps in Q Developer.
+
+✏️ After the code has been generated, ensure you are downloading and installing any needed dependencies. To view dependencies, check the requirements.txt file generated by Q Developer.
+
+Open a new Terminal window in Visual Studio Code by selecting Terminal, and then New Window.
+
+Make sure you are in the code directory. If you're not, use the cd command to navigate to the correct directory.
+
+Run the following command to download dependencies:
+pip install -r requirements.txt
+
+✏️ If you receive an error command not found: pip, you might have conflicts between Python package versions. To continue with the exercise, consider one of the following fixes:
+
+Option 1: Switch to your computer Terminal or command prompt and run pip install -r requirements.txt.
+Option 2: In Visual Studio Code, in the Terminal, run pip3 install -r requirements.txt.
+Option 3: In Visual Studio Code, create and activate a virtual environment. For more information, see 
+Install packages in a virtual environment using pip and venv
+.
+Option 4: Troubleshoot the pip installation in the 
+pip documentation
+.
+
+Enter flask run to start the application.
+
+✏️ This command launches the Flask application and provides the localhost URL to access the application and test its functionality. The URL looks similar to http://127.0.0.1:5000/. Copy the URL and paste it into the new browser window.
+
+🚨 If your application does not run due to errors, try copying and pasting the error into the Q chat interface and crafting a prompt asking Q to fix the problem or provide tips.
+
+Iterate with Q developer using the chat window in the browser until you are satisfied with the features of the application.
+
+Task 6: Document Your App
+You will now generate documentation for the task tracker web application using the /doc agent.
+
+Open a new Q chat window and type the following:
+/doc
+
+Select the option to create a README file for your project and follow the steps provided by Q Developer.
+
+Save the generated documentation in your project folder and review.
+
+Iterate with Q Developer until satisfied.
+
+Task 7: Cleanup
+Stop the Flask app by pressing Ctl+C in the Terminal session where the application is running.
+
+Exit Amazon Q Developer by clicking on the X button in the chat interface.
+
+✅ Exercise Complete
+You've now:
+
+✅ Debugged a Python app
+
+✅ Used Q Developer to fix code and handle errors
+
+✅ Converted the app into a basic web app
+
+✅ Practiced interacting with multiple Q Developer agents
+
+Additional Resources
+Amazon Q Developer
+
+Amazon Q Developer User Guide
+
+Amazon Q Developer for GitHub
+
+Amazon Q Developer on the Command Line
+
+

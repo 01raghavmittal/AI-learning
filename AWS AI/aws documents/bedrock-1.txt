@@ -1,0 +1,33 @@
+important link:
+
+https://docs.aws.amazon.com/boto3/latest/reference/services/bedrock.html
+https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html
+https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+
+https://docs.aws.amazon.com/bedrock/
+https://docs.aws.amazon.com/boto3/latest/
+https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html
+
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html
+https://docs.aws.amazon.com/amazonq/detector-library/
+
+https://aws.amazon.com/q/developer/build/?trk=255ccf7b-4a76-4dcb-9b07-68709e2b636b&sc_channel=ps&ef_id=CjwKCAjw6NrBBhB6EiwAvnT_rgQHNhQrxePn19JWG6jck1J5WbfkQ5YgQbBjj9VzVksGRu97fKsHwRoCKR8QAvD_BwE:G:s&s_kwcid=AL!4422!3!698234556956!e!!g!!amazon%20q%20developer!21048268533!162057027495&gad_campaignid=21048268533&gbraid=0AAAAADjHtp_oKA11N1sjYpZAWAIsm-F4f&gclid=CjwKCAjw6NrBBhB6EiwAvnT_rgQHNhQrxePn19JWG6jck1J5WbfkQ5YgQbBjj9VzVksGRu97fKsHwRoCKR8QAvD_BwE
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html?p=qdev&z=subnav&loc=8&refid=255ccf7b-4a76-4dcb-9b07-68709e2b636b
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/amazon-q-for-github.html
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line.html
+
+
+https://www.coursera.org/learn/getting-started-aws-generative-ai-developers/supplement/5b0gc/amazon-q-developer
+
+
+
+
+Set-up
+1. Install Python
+2. Install Visual Studio Code
+3. Install AWS CLI
+    Open the Terminal application and run the following command: 
+        msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+
+        Complete the installation using the default values provided in the wizard. 
+            aws --version

@@ -41,7 +41,7 @@ def test_web_search(prompt):
         return None
 
 if __name__ == "__main__":
-    prompt = "I am a Sales rep and need to know about the lead https://norcalorthosurgery.com/ (NORCAL ORTHOPEDICS SURGERY CENTER). Can you give me a summary of the vertical and payment acceptable modes, 6 key features and pain points for this merchant. Verticals Falls Under the follows 1. Healthcare 2. Restaurants 3. Retail 4. Personal Services 5. Professional Services 6. Non profit 7. Automotive 8. B2B 9. Others. Payment Location can be online, in person or Omni. Method of collecting payment Can be Digital , e commnerce website, Mobile and POS System."
+    prompt = "I am a Sales rep and need to know about the lead https://www.reinkonline.com/ (Re-Ink). Can you give me a summary of the vertical and payment acceptable modes, 6 key features and pain points for this merchant. Verticals Falls Under the follows 1. Healthcare 2. Restaurants 3. Retail 4. Personal Services 5. Professional Services 6. Non profit 7. Automotive 8. B2B 9. Others. Payment Location can be online, in person or Omni. Method of collecting payment Can be Digital , e commnerce website, Mobile and POS System."
     result = test_web_search(prompt)
     
     if result:

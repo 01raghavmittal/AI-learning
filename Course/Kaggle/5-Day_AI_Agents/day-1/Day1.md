@@ -1,4 +1,4 @@
-# Day 1: AI Agents Course
+# Day 1: AI Agents Course -- 
 
 ## Resources
 

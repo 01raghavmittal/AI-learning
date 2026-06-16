@@ -13,7 +13,14 @@
 - [Getting Started with Google Antigravity (Step 7)](https://codelabs.developers.google.com/getting-started-google-antigravity#7)
 - [Deploy from AI Studio to Cloud Run](https://codelabs.developers.google.com/deploy-from-aistudio-to-run?hl=en#0)
 
+
+### Recommended Documentation & Guides
+- [Prompting strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies)
+- [Function calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling)
+- [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation)
+
 ---
+# Todo :
 
 ## Key Learning Points
 *Add your key points here on what you learned from these contents...*

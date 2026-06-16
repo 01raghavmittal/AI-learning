@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World - Day 1</title>
+    <meta name="description" content="A beautiful, interactive Hello World presentation card for Day 1 of the AI Agents course.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 25, 40, 0.65);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-1: #6366f1; /* Indigo */
+            --accent-2: #a855f7; /* Purple */
+            --accent-3: #ec4899; /* Pink */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background blob gradient */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 100%);
+            top: -100px;
+            left: -100px;
+            filter: blur(80px);
+            z-index: 1;
+            animation: float-slow 25s infinite alternate ease-in-out;
+        }
+
+        .bg-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(99, 102, 241, 0.05) 60%, transparent 100%);
+            bottom: -100px;
+            right: -100px;
+            filter: blur(80px);
+            z-index: 1;
+            animation: float-slow-reverse 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 80px) scale(1.1); }
+        }
+
+        @keyframes float-slow-reverse {
+            0% { transform: translate(0, 0) scale(1.1); }
+            100% { transform: translate(-80px, -100px) scale(0.9); }
+        }
+
+        /* Glassmorphism Card */
+        main {
+            position: relative;
+            z-index: 10;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 540px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.15);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #c084fc;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 9999px;
+            margin-bottom: 2rem;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Headings */
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .translation-text {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            height: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Action Button */
+        button {
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.85rem 1.8rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            border-radius: 12px;
+        }
+
+        button:hover::after {
+            opacity: 1;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.45);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button span {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer info */
+        footer {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer span {
+            color: var(--accent-3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Decorative glows -->
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Main card -->
+    <main>
+        <div class="badge" id="badge-day">Day 1 Challenge</div>
+        
+        <h1 id="main-title">Hello World</h1>
+        
+        <div class="translation-text" id="translation-box">Bonjour le monde</div>
+
+        <div class="divider"></div>
+
+        <button id="greet-btn">
+            <span>Translate Greeting</span>
+        </button>
+
+        <footer>
+            Built with <span>❤</span> by Antigravity
+        </footer>
+    </main>
+
+    <script>
+        const greetings = [
+            { text: "Bonjour le monde", lang: "French" },
+            { text: "Hola Mundo", lang: "Spanish" },
+            { text: "Hallo Welt", lang: "German" },
+            { text: "Ciao mondo", lang: "Italian" },
+            { text: "Olá Mundo", lang: "Portuguese" },
+            { text: "こんにちは世界", lang: "Japanese" },
+            { text: "안녕하세요", lang: "Korean" },
+            { text: "नमस्ते दुनिया", lang: "Hindi" },
+            { text: "Hello World", lang: "English" }
+        ];
+
+        let currentIndex = 0;
+        const translationBox = document.getElementById('translation-box');
+        const greetBtn = document.getElementById('greet-btn');
+
+        greetBtn.addEventListener('click', () => {
+            // Fade out
+            translationBox.classList.add('fade-out');
+            
+            setTimeout(() => {
+                // Change text
+                currentIndex = (currentIndex + 1) % greetings.length;
+                translationBox.textContent = `${greetings[currentIndex].text} (${greetings[currentIndex].lang})`;
+                
+                // Fade in
+                translationBox.classList.remove('fade-out');
+                translationBox.classList.add('fade-in');
+            }, 300);
+        });
+
+        // Set initial translation text properly
+        translationBox.textContent = `${greetings[currentIndex].text} (${greetings[currentIndex].lang})`;
+    </script>
+</body>
+</html>
